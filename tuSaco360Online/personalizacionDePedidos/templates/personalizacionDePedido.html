@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylee.css">
+    <title>Personalización de pedidos</title>
+</head>
+<body>
+    <h1>Personalización de pedido</h1>
+    <form action="#" method="post">
+        <label for="color">Color:</label>
+        <input type="text" id="color" name="color" required>
+
+        <label for="talla">Talla:</label>
+        <select id="talla" name="talla" required>
+            <option value="">Seleccione una talla</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+        </select>
+
+        <label for="tipoTela">Tipo de Tela:</label>
+        <input type="text" id="tipoTela" name="tipoTela" required>
+
+        <label for="estampado">Estampado:</label>
+        <input type="text" id="estampado" name="estampado" required>
+
+        <label for="bolsillo">¿Con Bolsillo?</label>
+        <select id="bolsillo" name="bolsillo" required>
+            <option value="">Seleccione una opción</option>
+            <option value="sí">Sí</option>
+            <option value="no">No</option>
+        </select>
+
+        <label for="capota">¿Con Capota?</label>
+        <select id="capota" name="capota" required>
+            <option value="">Seleccione una opción</option>
+            <option value="sí">Sí</option>
+            <option value="no">No</option>
+        </select>
+
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>
