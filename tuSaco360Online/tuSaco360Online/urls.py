@@ -16,8 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from login import views
-
+#from login import views  #Hacer que la ruta cuando desde el etodo signup se guarde el usuario 
+                         #se redireccione a la pagina de personalizacionDePedido. 
+from personalizacionDePedidos import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
