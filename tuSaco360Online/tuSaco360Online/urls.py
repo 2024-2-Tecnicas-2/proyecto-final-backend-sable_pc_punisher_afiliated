@@ -16,12 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-#from login import views  #Hacer que la ruta cuando desde el etodo signup se guarde el usuario 
-                         #se redireccione a la pagina de personalizacionDePedido. 
-from personalizacionDePedidos import views
+from login import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('signup/', views.registro),
-   
+    path('signup/', views.signup),
+    path('logout', views.signout, name= 'logout'),
+    path('signin', views.signin, name= 'signin'),
+    path('createBag', views.create_bag, name= 'createBag'),   
 ]
