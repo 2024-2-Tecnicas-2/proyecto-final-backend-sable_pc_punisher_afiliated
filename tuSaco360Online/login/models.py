@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 class Client(AbstractUser):
     name = models.CharField(max_length=100, null=False, blank=False)
-    email = models.EmailField(null=False, blank=False)
+    email = models.EmailField(null=False, blank=False, unique=True)
     address = models.CharField(max_length=100, null=False, blank=False)
     phone = models.CharField(max_length=10, null=False, blank=False)
 
