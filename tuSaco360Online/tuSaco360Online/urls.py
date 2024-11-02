@@ -17,11 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from login import views
+from pedido import views as viewsp
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('signup/', views.signup),
     path('logout', views.signout, name= 'logout'),
     path('signin', views.signin, name= 'signin'),
-    path('createBag', views.create_bag, name= 'createBag'),   
+    path('createBag', views.create_bag, name= 'createBag'),  
+    path('dashboard/',viewsp.dashboard_pedido, name = 'dashboard'),
+    path('actualizacion_estado/',viewsp.actualizar_pedido, name = 'actualizacion_estado')
 ]
+

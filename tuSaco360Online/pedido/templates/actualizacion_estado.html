@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<h1>Actualizar Estado del Pedido {{ pedido.id }}</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <select name="estado">
+            <option value="pendiente">Pendiente</option>
+            <option value="en producción">En Producción</option>
+            <option value="enviado">Enviado</option>
+        </select>
+        <button type="submit">Actualizar</button>
+    </form>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
