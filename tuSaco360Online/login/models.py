@@ -30,21 +30,28 @@ class Hoodie(models.Model):
     details = models.TextField()
     print = models.BooleanField(null=False, blank=False)
     hood = models.BooleanField(null=False, blank=False)
+    pocket = models.BooleanField(null=False, blank=False, default=False)
     price = models.FloatField(null=False)
     
 class HoodiePrintDesign(models.Model):
     hoodie = models.ForeignKey(Hoodie, on_delete=models.CASCADE, null=False)
     print_design = models.ForeignKey(PrintDesign, on_delete=models.CASCADE, null=False)
-    cantidad = models.PositiveBigIntegerField()
+    #cantidad = models.PositiveBigIntegerField() se retira, no es necesario en este punto, la cantidad se especifica en hoodie order
 
 
 class Order(models.Model):
     creationDate = models.DateField(auto_now_add=True,null=False)
     finalPrice = models.FloatField(null=False)
-    hoodie = models.ManyToManyField(Hoodie, through='HoodieOrder', null=False)
+    hoodie = models.ManyToManyField(Hoodie, through='HoodieOrder')
     deliveryDate = models.DateField()
-    status = models.CharField(default="Pendiente", null=False, max_length=30)
+    class Status(models.TextChoices):
+        PENDIENTE = 'Pd'
+        ENVIADO = 'Ev'
+        COMPLETADO = 'Ct'
+    status = models.CharField(default="Pendiente", null=False, max_length=2, choices=Status)
     client = models.ForeignKey(Client, on_delete=models.CASCADE, null=False)
+    class Meta:
+        ordering = ['creationDate']#para ordenar por fecha
     
 
 class HoodieOrder(models.Model):
