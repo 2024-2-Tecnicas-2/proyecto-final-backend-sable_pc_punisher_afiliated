@@ -3,13 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="stylee.css">
     <title>Personalización de pedidos</title>
 </head>
-<body>
-    <h1>Personalización de pedido</h1>
-    <form action="#" method="post">
+<body>   
+
+    <h1>Personalización de saco</h1>
+
+    <!--Creo un formulario unico para cargar la información del saco y la imagem-->
+    <form action="{% url 'hoodie' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
         
+        <!--Mostramos el forulario completo con PrintDesign and Hoodie-->
+        {{ form.as_p }}
+
+        
+        <button type="submit">Crear Saco y Cargar Imagen</button>
     </form>
+
+        <!-- Condicional para que nos muestre un error si se presenta con letra rojita -->
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
 </body>
 </html>

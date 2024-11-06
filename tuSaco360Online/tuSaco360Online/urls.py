@@ -22,9 +22,9 @@ from pedido import views as viewsp
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('signup/', views.signup),
-    path('logout', views.signout, name= 'logout'),
-    path('signin', views.signin, name= 'signin'),
-    path('createBag', views.create_bag, name= 'createBag'),  
+    path('logout/', views.signout),
+    path('signin/', views.signin),
+    path('hoodie/', views.hoodie_form, name='hoodie'),  
     path('dashboard/',viewsp.dashboard_pedido, name = 'dashboard'),
     path('actualizacion_estado/',viewsp.actualizar_pedido, name = 'actualizacion_estado')
 ]
