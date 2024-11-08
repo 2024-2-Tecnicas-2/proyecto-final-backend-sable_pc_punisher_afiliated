@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sacos360</title>
+</head>
+<body>
+    <h2 style="margin-left:650px ;">Sacos360Online</h2>
+    <br>
+   
+
+    <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        
+        <!--Por el momento se deja sin direccion porque falta mover los archivos del formulario de Hoodie a la app Pedido-->
+        <li><a href="#">Crear Saco</a></li>
+        
+
+        {% if request.user.is_authenticated %}
+            <li><a href="{% url 'signout' %}">Salir</a></li>  
+
+        {% else %}
+            <li><a href="{% url 'signin' %}">Inicio de sesión</a></li>
+
+        {% endif %}
+
+        <li><a href="{% url 'signup' %}">Registrarse</a></li>
+    </ul>
+
+   {% block content %} {% endblock %}
+</body>
+</html>

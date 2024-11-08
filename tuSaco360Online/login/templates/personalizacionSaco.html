@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personalización de pedidos</title>
 </head>
-<body>   
+<body> 
 
+    
+
+    {% block conten %} 
     <h1>Personalización de saco</h1>
 
     <!--Creo un formulario unico para cargar la información del saco y la imagem-->
-    <form action="{% url 'hoodie' %}" method="POST" enctype="multipart/form-data">
+    <form action="{% url 'hoodieDesign' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         
         <!--Mostramos el forulario completo con PrintDesign and Hoodie-->
@@ -25,5 +28,10 @@
         <p style="color: red;">{{ error }}</p>
     {% endif %}
 
+
+
+
+
+    {% endblock %}
 </body>
 </html>

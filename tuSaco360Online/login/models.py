@@ -8,7 +8,7 @@ class Client(AbstractUser):
     phone = models.CharField(max_length=10, null=False, blank=False)
 
 class PrintDesign(models.Model):
-    picture = models.ImageField(upload_to='estampados/')#REVISAR BIEN ESTA OPCION, SOLO DEJA UNA IMAGEN 
+    picture = models.ImageField(upload_to='estampados/')#REVISAR BIEN ESTA OPCION, SOLO DEJA UNA IMAGEN
     pictureSize = models.CharField(max_length=50)
     location = models.TextField()
 
@@ -32,6 +32,7 @@ class Hoodie(models.Model):
     hood = models.BooleanField(null=False, blank=False)
     pocket = models.BooleanField(null=False, blank=False, default=False)
     price = models.FloatField(null=False)
+    PrintDesign = models.ManyToManyField(PrintDesign, through='HoodiePrintDesign')
     
 class HoodiePrintDesign(models.Model):
     hoodie = models.ForeignKey(Hoodie, on_delete=models.CASCADE, null=False)

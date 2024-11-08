@@ -1,10 +1,10 @@
 from django import forms
-from .models import Hoodie, PrintDesign
+from .models import Client
 
-class HoodieWithImageForm(forms.ModelForm):
-    # Definimos un campo para la imagen (especificamente para la imagen del PrintDesign)
-    picture = forms.ImageField(required=False)  # Hacemos que el campo de imagen sea opcional
 
-    class Meta:
-        model = Hoodie
-        fields = ['clothType', 'color', 'size', 'details', 'print', 'hood', 'pocket', 'price', 'picture']
+class LoginForm(forms.ModelForm):
+    
+    
+    class Meta: 
+        model = Client
+        fields = ['email', 'password','address','phone']

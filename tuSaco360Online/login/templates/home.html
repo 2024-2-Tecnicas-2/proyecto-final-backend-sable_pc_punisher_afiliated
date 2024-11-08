@@ -1,7 +1,13 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Inicio</h1>
+<h3>Acá tendremos toda la presentación de lo que es el negocio de sacos</h3>
+
+{% if request.user.is_authenticated %}
+<h4>
+    Bienvenido, {{ user.username | upper}}
+</h4>
+{% endif %} 
 
 
-{% block content %}
-<h1><!--Acá tendremos todo lo que es la presentación (Si la hacemos) de sacos, podríamos crear una galeria de sacos que ya Nata haya sacado,
-    redes sociales y demás  (lo hablamos para cordinar que se colocará. "Usuario3") --></h1>
 {% endblock %}
-
