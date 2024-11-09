@@ -14,7 +14,7 @@
 
     <!--Creo un formulario unico para cargar la información del saco y la imagem-->
     <form action="{% url 'hoodieDesign' %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
+        {% csrf_token %}    
         
         <!--Mostramos el forulario completo con PrintDesign and Hoodie-->
         {{ form.as_p }}

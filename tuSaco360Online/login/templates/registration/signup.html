@@ -3,53 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styleLogin.css">
-    
     <title>Registro</title>
 </head>
 <body>
-    {% extends  '../base.html' %}
+    {% extends '../base.html' %}
+
     {% block content %}
-    <form method="POST" action="../home.html">
+    <h1>Registro</h1>
+
+    <form method="POST">
         {% csrf_token %}
-    <!--Acá intento agregar unos estilos de css para que Julian ThepUnisher los corriga y quede melo :) -->
+        {{ form.as_p }}
 
-<h1>Datos de registro: </h1>
-
-    <div class="form-group">
-        <label for="{{ form.email.id_for_label }}">Email</label>
-        {{ form.email }}
-        <div class="invalid-feedback">{{ form.email.errors }}</div>
-    </div>
-
-    <div class="form-group">
-        <label for="{{ form.password.id_for_label }}">password</label>
-        {{ form.password }}
-        <div class="invalid-feedback">{{ form.password.errors }}</div>
-    </div>
-
-
-    <div class="form-group">
-        <label for="{{ form.email.id_for_label }}">address</label>
-        {{ form.address }}
-        <div class="invalid-feedback">{{ form.address.errors }}</div>
-    </div>
-
-
-    <div class="form-group">
-        <label for="{{ form.phone.id_for_label }}">phone</label>
-        {{ form.phone }}
-        <div class="invalid-feedback">{{ form.phone.errors }}</div>
-    </div>
-
-
-       
-            
-            
-            <button>Signup</button>
+        <button type="submit">Registrar</button>
     </form>
-{% endblock %}
-    
 
+    {% endblock %}
 </body>
 </html>

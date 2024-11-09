@@ -1,13 +1,11 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
 
-<h1>Inicio</h1>
-<h3>Acá tendremos toda la presentación de lo que es el negocio de sacos</h3>
+{% block content %}
+    <h1>Bienvenido a la tienda de sacos</h1>
 
-{% if request.user.is_authenticated %}
-<h4>
-    Bienvenido, {{ user.username | upper}}
-</h4>
-{% endif %} 
-
-
+    {% if user.is_authenticated %}
+        <h3>Bienvenido, {{ user.username | upper }}</h3>
+    {% else %}
+        <p>No has iniciado sesión.</p>
+    {% endif %}
 {% endblock %}

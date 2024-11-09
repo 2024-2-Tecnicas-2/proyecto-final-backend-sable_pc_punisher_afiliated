@@ -1,4 +1,3 @@
-<!--En esta scción se crea la seccion de inicio de sesión   atravez de un formualario que nos lo da django: AuthenticationForm -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,20 +6,22 @@
     <title>Signin</title>
 </head>
 <body>
-    {% extends  '../base.html' %}
+    {% extends '../base.html' %}
 
-{% block content %}
+    {% block content %}
     <h1>Signin</h1>
 
-    <form action="" method="post">
+    <form method="POST">
         {% csrf_token %}
+        {{ form.as_p }}
 
-            {{ form_as.p }}
-
-            
-        <button>Signin</button>
+        <button type="submit">Signin</button>
     </form>
-{% endblock %}
+
+    {% if error %}
+        <p style="color:red">{{ error }}</p>
+    {% endif %}
+
+    {% endblock %}
 </body>
 </html>
-
