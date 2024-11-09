@@ -1,5 +1,5 @@
-""" from django import forms
-from .models import Hoodie
+from django import forms
+from login.models import *
 
 class HoodieWithImageForm(forms.ModelForm):
     # Definimos un campo para la imagen (especificamente para la imagen del PrintDesign)
@@ -9,4 +9,3 @@ class HoodieWithImageForm(forms.ModelForm):
         model = Hoodie
         fields = ['clothType', 'color', 'size', 'details', 'print', 'hood', 'pocket', 'price', 'picture']
 
-"""

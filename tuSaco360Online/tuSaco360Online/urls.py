@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('login.urls')),
     path('dashboard/',viewsp.dashboard_pedido, name = 'dashboard'),
-    path('actualizacion_estado/',viewsp.actualizar_pedido, name = 'actualizacion_estado')
+    path('actualizacion_estado/',viewsp.actualizar_pedido, name = 'actualizacion_estado'),    
+    path('',include('pedido.urls')),    
 ]
 
