@@ -46,7 +46,7 @@ def signup(request):
 
 def signin(request):
     formularioLogin = LoginForm()
-    return render(request, 'signin', {
+    return render(request, 'registration/signin.html', {
         'form':  formularioLogin
     })
 
