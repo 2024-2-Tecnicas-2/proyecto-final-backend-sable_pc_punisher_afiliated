@@ -2,17 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
-# from django.db import IntegrityError
-# from .forms import HoodieWithImageForm
-from .models import PrintDesign
 from .forms import LoginForm, formularioLogin
 
 
 def home(request):
     return render(request, 'home.html')
-from django.shortcuts import render, redirect
-from django.contrib.auth import login
-from .forms import LoginForm
+
 
 def signup(request):
     if request.method == 'POST':
@@ -63,7 +58,7 @@ def signin(request):
 
 
 
-# la funcionalidad de cerra sesion borrando los datos de autenticación (Hay un error en la base de datos que llegan dos valores al tiempo)
+
 def signout(request):
     logout(request)
     return redirect('home')

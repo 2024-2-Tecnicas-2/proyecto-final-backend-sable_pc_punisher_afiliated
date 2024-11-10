@@ -21,8 +21,8 @@ from pedido import views as viewsp
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('login.urls')),
-    path('dashboard/',viewsp.dashboard_pedido, name = 'dashboard'),
-    path('actualizacion_estado/',viewsp.actualizar_pedido, name = 'actualizacion_estado'),    
-    path('',include('pedido.urls')),    
+    path('',include('pedido.urls')),
+    path('', include('director.urls')),
+    path('', include('cliente.urls'))    
 ]
 

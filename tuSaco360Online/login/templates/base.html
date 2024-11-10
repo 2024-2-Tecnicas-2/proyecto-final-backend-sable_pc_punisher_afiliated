@@ -13,13 +13,12 @@
     <ul>
         <li><a href="{% url 'home' %}">Home</a></li>
         
-        <!--Por el momento se deja sin direccion porque falta mover los archivos del formulario de Hoodie a la app Pedido-->
-        <li><a href="{% url 'hoodieDesign' %}">Crear Saco</a></li>
         
 
         {% if request.user.is_authenticated %}
             <li><a href="{% url 'signout' %}">Salir</a></li>  
-
+            <li><a href="{% url 'hoodieDesign' %}">Crear Saco</a></li>
+        
         {% else %}
             <li><a href="{% url 'signin' %}">Inicio de sesión</a></li>
             <li><a href="{% url 'signup' %}">Registrarse</a></li>

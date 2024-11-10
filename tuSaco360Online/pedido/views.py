@@ -9,16 +9,12 @@ from login.models import PrintDesign
 # Create your views here.
 
 
-def dashboard_pedido(request):
-    return render(request, 'dashboard.html')
-
 
 def actualizar_pedido(request):
     return render(request, 'actualizacion_estado.html')
 
-    # Esto debe ir creeado en la app de Pedido, ya que la personalización del saco hace parte del pedido.
-# Tambien hay que crear los modelos en pedido para que el formulario en fomrs.py queden con las tablas de la base de datos.
-# Cambiar tambien la personalizacionSaco.html para pedido en templates.
+
+
 
 
 def hoodieForm(request):
@@ -38,7 +34,7 @@ def hoodieForm(request):
                 print_design.save()
 
             # O donde quieras redirigir después de guardar
-            return redirect('hoodie')
+            return redirect('hoodieDesign')
         else:
             return render(request, 'personalizacionSaco.html', {'form': form, 'error': 'Formulario inválido,, por favor revisa los campos.'})
 
