@@ -50,10 +50,12 @@ class Hoodie(models.Model):
         elif(self.clothType == 'Burda' and not self.hood and not self.pocket):
             self.price = 110000
             
-        # Obtener estampados asociados
+        # Obtener estampados asociados, se toman los registros de la tabla intermedia y mediante objects, se filtra para obtener solo registros
+        #que corresponden con el hoodie actual, tomando asi solo las imagenes asociados al hoodie actual
         estampados = HoodiePrintDesign.objects.filter(hoodie=self)
         
-        # Contar estampados de cada tamaño
+        # Contar estampados de cada tamaño, con la lista de instancias hoodiePrintDesign que coinciden con el hoodie actual, se filtra
+        #mediante el atributo de pictureSize y se filtra por cada una de las dos opciones y se hace el conteo
         count_20x20 = estampados.filter(print_design__pictureSize='20x20').count()
         count_20x40 = estampados.filter(print_design__pictureSize='20x40').count()
 
