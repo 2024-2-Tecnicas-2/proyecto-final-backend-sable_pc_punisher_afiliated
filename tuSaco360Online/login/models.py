@@ -9,7 +9,10 @@ class Client(AbstractUser):
 
 class PrintDesign(models.Model):
     picture = models.ImageField(upload_to='estampados/')#REVISAR BIEN ESTA OPCION, SOLO DEJA UNA IMAGEN
-    pictureSize = models.CharField(max_length=50)
+    class PictureSize(models.TextChoices):
+        VEINTEPORCUARENTA = '20x20'
+        VEINTEPORVEINTE = '20x40'
+    pictureSize = models.CharField(max_length=5, choices=PictureSize, null=False,blank=False)
     location = models.TextField()
 
 class Hoodie(models.Model):
@@ -33,6 +36,45 @@ class Hoodie(models.Model):
     pocket = models.BooleanField(null=False, blank=False, default=False)
     price = models.FloatField(null=False)
     PrintDesign = models.ManyToManyField(PrintDesign, through='HoodiePrintDesign')
+    def calcularPrecio(self):
+        if(self.clothType == 'Algodón Perchado' and self.hood and self.pocket):
+            self.price = 120000
+        elif(self.clothType == 'Algodón Perchado' and (not self.hood or not self.pocket)):
+            self.price = 110000
+        elif(self.clothType == 'Algodón Perchado' and not self.hood and not self.pocket):
+            self.price = 95000
+        elif(self.clothType == 'Burda' and self.hood and self.pocket):
+            self.price = 140000
+        elif(self.clothType == 'Burda' and (not self.hood or not self.pocket)):
+            self.price = 125000
+        elif(self.clothType == 'Burda' and not self.hood and not self.pocket):
+            self.price = 110000
+            
+        # Obtener estampados asociados
+        estampados = HoodiePrintDesign.objects.filter(hoodie=self)
+        
+        # Contar estampados de cada tamaño
+        count_20x20 = estampados.filter(print_design__pictureSize='20x20').count()
+        count_20x40 = estampados.filter(print_design__pictureSize='20x40').count()
+
+        # Calcular el precio adicional por estampados
+        if count_20x20 == 1:
+            self.price += 15000
+        elif count_20x20 == 2:
+            self.price += 25000
+
+        if count_20x40 == 1:
+            self.price += 35000
+        elif count_20x40 == 1 and count_20x20 == 1:
+            self.price += 45000
+
+    def save(self, *args, **kwargs):#Se pone *args y **kwargs para que no haya conflicto con los argumentos que utiliza django por defecto al momento de guardar en la DB
+        # Llama a calcularPrecio antes de guardar
+        self.calcularPrecio()
+        super().save(*args, **kwargs)  # Guarda el objeto, se utiliza super debido a que los modelos heredan de la clase Model
+
+                
+    
     
 class HoodiePrintDesign(models.Model):
     hoodie = models.ForeignKey(Hoodie, on_delete=models.CASCADE, null=False)
@@ -54,13 +96,9 @@ class Order(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE, null=False)
     class Meta:
         ordering = ['creationDate']#para ordenar por fecha
-    
-
+        
+ 
 class HoodieOrder(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, null=False)
     hoodie = models.ForeignKey(Hoodie, on_delete=models.CASCADE, null=False)
     cantidad = models.PositiveIntegerField(null=False)
-
-
-
-
