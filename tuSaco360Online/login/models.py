@@ -34,7 +34,7 @@ class Hoodie(models.Model):
     print = models.BooleanField(null=False, blank=False)
     hood = models.BooleanField(null=False, blank=False)
     pocket = models.BooleanField(null=False, blank=False, default=False)
-    price = models.FloatField(null=False)
+    price = models.FloatField()
     PrintDesign = models.ManyToManyField(PrintDesign, through='HoodiePrintDesign')
     def calcularPrecio(self):
         if(self.clothType == 'Algodón Perchado' and self.hood and self.pocket):
