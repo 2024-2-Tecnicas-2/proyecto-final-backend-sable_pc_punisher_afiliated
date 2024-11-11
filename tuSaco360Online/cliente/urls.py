@@ -1,6 +1,6 @@
 from django.urls import path
-# from .views import     [Acá impottan todas las funciones o metodos que provienen de views.py ejemplo "home"]
+from .views import misPedidos
 
 urlpatterns = [
-    #path('',home, name='home'),  
+    path('misPedidos/', misPedidos, name='misPedidos')
 ]

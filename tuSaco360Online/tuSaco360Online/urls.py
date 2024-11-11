@@ -20,9 +20,10 @@ from pedido import views as viewsp
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('login.urls')),
+       path('', include('login.urls')),
     path('',include('pedido.urls')),
     path('', include('director.urls')),
-    path('', include('cliente.urls'))    
+    path('', include('cliente.urls')) 
+    
 ]
 
