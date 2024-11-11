@@ -49,6 +49,7 @@ class Order(models.Model):
         PENDIENTE = 'Pd'
         ENVIADO = 'Ev'
         COMPLETADO = 'Ct'
+        CANCELADO = 'Cd'
     status = models.CharField(default="Pendiente", null=False, max_length=2, choices=Status)
     client = models.ForeignKey(Client, on_delete=models.CASCADE, null=False)
     class Meta:
