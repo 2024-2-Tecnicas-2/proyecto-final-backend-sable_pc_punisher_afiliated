@@ -1,21 +1,22 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from login.models import *
 
+@login_required
 def misPedidos(request):
-    clientes = Client.objects.all()
+    # Filtrar solo los pedidos del cliente que ha iniciado sesión
+    pedidos = Order.objects.filter(client=request.user)
+    sacosPedidos = HoodieOrder.objects.filter(order__in=pedidos)
+    
     estampados = PrintDesign.objects.all()
     sacos = Hoodie.objects.all()
     sacosEstampados = HoodiePrintDesign.objects.all()
-    pedidos = Order.objects.all()
-    sacosPedidos = HoodieOrder.objects.all()
     
-    # Renderizar la vista del cliente sin opciones de edición
     return render(request, 'misPedidos.html', 
                   context={
-                      'clientes': clientes,
+                      'pedidos': pedidos,
+                      'sacosPedidos': sacosPedidos,
                       'estampados': estampados,
                       'sacos': sacos,
                       'sacosEstampados': sacosEstampados,
-                      'pedidos': pedidos,
-                      'sacosPedidos': sacosPedidos,
                   })
