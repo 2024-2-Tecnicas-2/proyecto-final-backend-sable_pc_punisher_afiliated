@@ -12,7 +12,7 @@
 <body>
     <div class="container mt-5">
         <h1 class="mb-4">Dashboard de Administración</h1>
-        <h1>{{ editing_pedido_id }}</h1>
+        
         
         <!-- Filtro por estado de pedido -->
         <label for="filtro">Filtrar por estado de pedido</label>
@@ -48,9 +48,10 @@
                         
                         <!-- Mostrar estado del pedido -->
                         <td >
-                            <h1>{{pedido.id}}</h1>
-                            {% if pedido.id == editing_pedido_id %}
-                                <form method="POST" action="{% url 'guardar_pedido' pedido.id %}">
+                            
+                            {% if pedido.id == editingPedidoId %}
+                                
+                                <form method="POST" >
                                     {% csrf_token %}
                                     <select name="status" class="form-control">
                                         <option value="Cd" {% if pedido.status == 'Cd' %}selected{% endif %}>Cancelado</option>
@@ -96,7 +97,7 @@
                         </td>
                         <td>
                             {% if pedido.id == editing_pedido_id %}
-                                <button type="submit" class="btn btn-success" name="pedido_id" value="{{ pedido.id }}">Guardar</button>
+                                <button type="submit" class="btn btn-success" name="pedido_id"  value="{{ pedido.id }}" >Guardar</button>
                             {% else %}
                                 <a href="?editing={{ pedido.id }}" class="btn btn-primary">Editar</a>
                             {% endif %}
