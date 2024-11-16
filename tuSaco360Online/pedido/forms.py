@@ -7,5 +7,5 @@ class HoodieWithImageForm(forms.ModelForm):
 
     class Meta:
         model = Hoodie
-        fields = ['clothType', 'color', 'size', 'details', 'print', 'hood', 'pocket', 'price', 'picture']
+        fields = ['clothType', 'color', 'size', 'details', 'print', 'hood', 'pocket','picture']
 

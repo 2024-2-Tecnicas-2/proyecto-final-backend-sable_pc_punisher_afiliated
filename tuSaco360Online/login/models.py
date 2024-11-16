@@ -31,10 +31,10 @@ class Hoodie(models.Model):
     
     size = models.CharField(max_length=3, null=False, blank=False, choices=Size)
     details = models.TextField()
-    print = models.BooleanField(null=False, blank=False)
-    hood = models.BooleanField(null=False, blank=False)
-    pocket = models.BooleanField(null=False, blank=False, default=False)
-    price = models.FloatField()
+    print = models.BooleanField(default=False)
+    hood = models.BooleanField(null=False, default=False )
+    pocket = models.BooleanField(null=False , default=False)
+    price = models.FloatField(default=0)
     PrintDesign = models.ManyToManyField(PrintDesign, through='HoodiePrintDesign')
     def calcularPrecio(self):
         if(self.clothType == 'Algodón Perchado' and self.hood and self.pocket):
@@ -50,30 +50,29 @@ class Hoodie(models.Model):
         elif(self.clothType == 'Burda' and not self.hood and not self.pocket):
             self.price = 110000
             
+        estampados = HoodiePrintDesign.objects.filter(hoodie=self)
         # Obtener estampados asociados, se toman los registros de la tabla intermedia y mediante objects, se filtra para obtener solo registros
         #que corresponden con el hoodie actual, tomando asi solo las imagenes asociados al hoodie actual
-        estampados = HoodiePrintDesign.objects.filter(hoodie=self)
+        if(estampados.exists()):
+            
+            # Contar estampados de cada tamaño, con la lista de instancias hoodiePrintDesign que coinciden con el hoodie actual, se filtra
+            #mediante el atributo de pictureSize y se filtra por cada una de las dos opciones y se hace el conteo
+            count_20x20 = estampados.filter(print_design__pictureSize='20x20').count()
+            count_20x40 = estampados.filter(print_design__pictureSize='20x40').count()
+            # Calcular el precio adicional por estampados
+            self.price += count_20x20 * 15000  # Cada estampado 20x20 cuesta 15000
+            self.price += count_20x40 * 35000  # Cada estampado 20x40 cuesta 35000
         
-        # Contar estampados de cada tamaño, con la lista de instancias hoodiePrintDesign que coinciden con el hoodie actual, se filtra
-        #mediante el atributo de pictureSize y se filtra por cada una de las dos opciones y se hace el conteo
-        count_20x20 = estampados.filter(print_design__pictureSize='20x20').count()
-        count_20x40 = estampados.filter(print_design__pictureSize='20x40').count()
+        
 
-        # Calcular el precio adicional por estampados
-        if count_20x20 == 1:
-            self.price += 15000
-        elif count_20x20 == 2:
-            self.price += 25000
-
-        if count_20x40 == 1:
-            self.price += 35000
-        elif count_20x40 == 1 and count_20x20 == 1:
-            self.price += 45000
+        
 
     def save(self, *args, **kwargs):#Se pone *args y **kwargs para que no haya conflicto con los argumentos que utiliza django por defecto al momento de guardar en la DB
-        # Llama a calcularPrecio antes de guardar
-        self.calcularPrecio()
-        super().save(*args, **kwargs)  # Guarda el objeto, se utiliza super debido a que los modelos heredan de la clase Model
+        if not self.pk:  # Verifica si el objeto no ha sido guardado
+            super().save(*args, **kwargs)  # Guarda inicialmente el objeto para obtener un ID
+
+        self.calcularPrecio()  # Calcula el precio después de guardar
+        super().save(*args, **kwargs)  # Guarda nuevamente con el precio actualizado
 
                 
     
