@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diseño de Estampado</title>
+</head>
+<body>
+    <h2>Selecciona el diseño para el estampado</h2>
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div>
+            <label for="pictures">Selecciona las imágenes para el estampado:</label>
+            <input type="file" name="pictures" id="pictures" multiple required>
+        </div>
+
+        <div>
+            <label for="pictureSize">Selecciona el tamaño del estampado:</label>
+            <select name="pictureSize" id="pictureSize">
+                <option value="20x20">20x20 cm</option>
+                <option value="20x40">20x40 cm</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="location">Selecciona la ubicación del estampado:</label>
+            <select name="location" id="location">
+                <option value="Frente">Frente</option>
+                <option value="Espalda">Espalda</option>
+                <option value="Manga">Manga</option>
+            </select>
+        </div>
+
+        <button type="submit">Guardar diseño</button>
+    </form>
+</body>
+</html>

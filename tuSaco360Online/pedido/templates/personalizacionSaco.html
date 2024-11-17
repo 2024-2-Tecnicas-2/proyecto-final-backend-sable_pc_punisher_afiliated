@@ -3,32 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personalización de pedidos</title>
+    <title>Personalización de Saco</title>
 </head>
-<body> 
-    {% block conten %} 
-    <h1>Personalización de saco</h1>
+<body>
+    <h1>Personalización de Saco</h1>
 
-    <!-- Formulario para cargar el hoodie y las imágenes -->
+    <!-- Formulario para cargar el hoodie -->
     <form action="{% url 'hoodieDesign' %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}    
+        {% csrf_token %}
 
-        <!-- Mostramos el formulario para el hoodie -->
+        <!-- Mostrar el formulario del hoodie -->
         {{ form.as_p }}
 
-        <!-- Campo para cargar múltiples imágenes 
-        <label for="pictures">Selecciona las imágenes para el estampado:</label>
-        <input type="file" name="pictures" id="pictures" multiple>
-        -->
-        
-        
-        <button type="submit">Crear Saco y Cargar Imágenes</button>
+        <button type="submit">Crear Saco</button>
     </form>
 
     {% if error %}
         <p style="color: red;">{{ error }}</p>
     {% endif %}
-
-    {% endblock %}
 </body>
 </html>

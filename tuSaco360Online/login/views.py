@@ -1,6 +1,4 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, formularioLogin
@@ -29,9 +27,6 @@ def signup(request):
 
     return render(request, 'registration/signup.html', {'form': form})
 
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-from .forms import formularioLogin
 
 def signin(request):
     if request.method == 'POST':
