@@ -12,7 +12,7 @@ def dashboard_pedido(request):
     sacosPedidos = HoodieOrder.objects.all()
     
     # Obtener el id del pedido que se está editando desde la URL (si existe)
-    editingPedidoId = request.GET.get('editing', None)
+    
     editingPedidoId = request.GET.get('editing', None)
     if editingPedidoId:
         try:
@@ -49,6 +49,3 @@ def dashboard_pedido(request):
                       'editingPedidoId': editingPedidoId  # Enviar el id del pedido que está siendo editado
                   }) 
 
-
-def guardar_pedido(request, pedido_id):
-    return HttpResponse("Pedido actualizado")

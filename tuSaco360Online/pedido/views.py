@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import HoodieWithImageForm
 from login.models import PrintDesign, HoodiePrintDesign, Hoodie
 from django.shortcuts import render, get_object_or_404
-
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -40,24 +40,26 @@ def printDesign(request, hoodie_id):
     # Obtenemos todas las imágenes enviadas en el formulario
     pictures = request.FILES.getlist('pictures')
 
-    if not pictures:
-        return redirect('pintDesign')
+    if request.method == 'POST':
+        if not pictures:
+            #return redirect('printDesign', hoodie_id)
+            return HttpResponse("Mondonguero")
 
-    else:
+        else:
 
-        for picture in pictures:
-            # Creamos una instancia de PrintDesign por cada imagen
-            print_design = PrintDesign(
-                picture=picture,
-                pictureSize='20x20',  # Puedes ajustarlo según necesites
-                location='Frente'     # Lo mismo para location
-            )
-            print_design.save()
+            for picture in pictures:
+                # Creamos una instancia de PrintDesign por cada imagen
+                print_design = PrintDesign(
+                    picture=picture,
+                    pictureSize='20x20',  # Puedes ajustarlo según necesites
+                    location='Frente'     # Lo mismo para location
+                )
+                print_design.save()
 
-            # Asociamos cada PrintDesign al Hoodie
-   #         HoodiePrintDesign.objects.create(hoodie=hoodie_instance,  # Este es el hoodie recuperado usando el ID
-        #                                     print_design=print_design)
+                # Asociamos cada PrintDesign al Hoodie
+                HoodiePrintDesign.objects.create(hoodie=hoodie_instance,  # Este es el hoodie recuperado usando el ID
+                                                print_design=print_design)
 
             return redirect('misPedidos')
 
-    return redirect('pintDesign.html')
+    return render(request, 'printDesig.html')
