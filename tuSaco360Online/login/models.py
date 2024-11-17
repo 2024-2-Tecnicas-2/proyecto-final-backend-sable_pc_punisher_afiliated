@@ -8,7 +8,7 @@ class Client(AbstractUser):
     phone = models.CharField(max_length=10, null=False, blank=False)
 
 class PrintDesign(models.Model):
-    picture = models.ImageField(upload_to='estampados/')#REVISAR BIEN ESTA OPCION, SOLO DEJA UNA IMAGEN
+    picture = models.FileField(upload_to='estampados/')#REVISAR BIEN ESTA OPCION, SOLO DEJA UNA IMAGEN
     class PictureSize(models.TextChoices):
         VEINTEPORCUARENTA = '20x20'
         VEINTEPORVEINTE = '20x40'
@@ -95,7 +95,7 @@ class Order(models.Model):
         CANCELADO = 'Cd'
     status = models.CharField(default="Pendiente", null=False, max_length=2, choices=Status)
     client = models.ForeignKey(Client, on_delete=models.CASCADE, null=False)
-    class Meta:
+    class Meta: 
         ordering = ['creationDate']#para ordenar por fecha
         
  

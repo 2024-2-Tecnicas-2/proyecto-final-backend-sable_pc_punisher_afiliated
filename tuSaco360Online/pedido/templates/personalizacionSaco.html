@@ -6,31 +6,28 @@
     <title>Personalización de pedidos</title>
 </head>
 <body> 
-
-    
-
     {% block conten %} 
     <h1>Personalización de saco</h1>
 
-    <!--Creo un formulario unico para cargar la información del saco y la imagem-->
+    <!-- Formulario para cargar el hoodie y las imágenes -->
     <form action="{% url 'hoodieDesign' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}    
-        
-        <!--Mostramos el forulario completo con PrintDesign and Hoodie-->
+
+        <!-- Mostramos el formulario para el hoodie -->
         {{ form.as_p }}
 
+        <!-- Campo para cargar múltiples imágenes 
+        <label for="pictures">Selecciona las imágenes para el estampado:</label>
+        <input type="file" name="pictures" id="pictures" multiple>
+        -->
         
-        <button type="submit">Crear Saco y Cargar Imagen</button>
+        
+        <button type="submit">Crear Saco y Cargar Imágenes</button>
     </form>
 
-        <!-- Condicional para que nos muestre un error si se presenta con letra rojita -->
     {% if error %}
         <p style="color: red;">{{ error }}</p>
     {% endif %}
-
-
-
-
 
     {% endblock %}
 </body>
