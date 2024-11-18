@@ -5,9 +5,24 @@ from .forms import LoginForm, formularioLogin
 
 
 def home(request):
+    # Si el usuario está autenticado, lo redirigimos a la página de "misPedidos"
     if request.user.is_authenticated:
-        return redirect('misPedidos')  
-    return render(request, 'home.html')
+        return redirect('misPedidos')
+
+    # Lista de productos (puedes agregar o modificar estos productos como desees)
+    products = [
+        {'name': 'Saco con capota Negro', 'price': 99000, 'image_url': 'https://http2.mlstatic.com/D_NQ_NP_929738-MCO77136564730_062024-O.webp'},
+        {'name': 'Saco sin capota Azul oscuro', 'price': 89999, 'image_url': 'https://majuauniformes.com/wp-content/uploads/2018/04/saco_perchado_capota.jpg'},
+        {'name': 'Saco sin capota Azul claro', 'price': 89999, 'image_url': 'https://www.centrodeimpresiones.com/wp-content/uploads/2018/02/051-ROYAL-7.jpg'},
+        {'name': 'Buzo sin capota manga larga', 'price': 69900, 'image_url': 'https://majuauniformes.com/wp-content/uploads/2018/04/saco_perchado_sin_capota.jpg'},
+        {'name': 'Saco estampado blanco', 'price': 50000, 'image_url': 'https://coloursstreet.co/cdn/shop/products/WhatsAppImage2021-03-09at10.24.44AM_18999db3-1201-4ac2-978d-f2d04dd988c4.jpg'},
+        {'name': 'Saco estampado rojo', 'price': 50000, 'image_url': 'https://coloursstreet.co/cdn/shop/products/WhatsAppImage2021-03-09at10.25.04AM.jpg?v=1630184558'},
+        {'name': 'Saco estampado negro', 'price': 50000, 'image_url': 'https://coloursstreet.co/cdn/shop/products/unnamed_12.jpg?v=1630184029'},
+        {'name': 'Saco sin capota Marrón', 'price': 89900, 'image_url': 'https://hmecuador.vtexassets.com/arquivos/ids/1618575/Sudadera-Loose-Fit---Marron---H-M-EC.jpg?v=638446306451730000'}
+    ]
+
+    # Renderizar el template home.html pasando la lista de productos
+    return render(request, 'home.html', {'products': products})
 
 
 def signup(request):

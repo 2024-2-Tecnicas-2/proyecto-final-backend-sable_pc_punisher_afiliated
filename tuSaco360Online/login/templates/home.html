@@ -1,11 +1,80 @@
-{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <title>Tienda de Camisetas</title>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <img src="{% static 'img/logo.png' %}" alt="Logo">
+        </div>
+        <div class="user-profile">
+            {% if user.is_authenticated %}
+                <span>{{ user.username }}</span>
+                <img src="https://icones.pro/wp-content/uploads/2021/02/icone-utilisateur-rose.png" alt="Foto de perfil">
+            {% else %}
+                <span>Invitado</span>
+            {% endif %}
+        </div>
+    </nav>
 
-{% block content %}
-    <h1>Bienvenido a la tienda de sacos</h1>
+    <div class="main-menu">
+        <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Sacos</a></li>
+            <li><a href="#">Ofertas</a></li>
+            <li><a href="#">Novedades</a></li>
+            <li><a href="#">Contacto</a></li>
+        </ul>
+    </div>
 
-    {% if user.is_authenticated %}
-        <h3>Bienvenido, {{ user.username | upper }}</h3>
-    {% else %}
-        <p>No has iniciado sesión.</p>
-    {% endif %}
-{% endblock %}
+    <div class="container">
+        <div class="page-header">
+            <h1>Sacos populares</h1>
+            <select class="modern-select">
+                <option>Popular</option>
+                <option>Lo más nuevo</option>
+                <option>Precio: Del más bajo al más alto</option>
+                <option>Precio: Del más alto al más bajo</option>
+            </select>
+        </div>
+
+        <div class="layout">
+            <aside class="filters">
+                <h3>Filtrar por</h3>
+                <ul class="filter-list">
+                    <li><a href="#">Categoría</a></li>
+                    <li><a href="#">Estilo</a></li>
+                    <li><a href="#">Tema</a></li>
+                    <li><a href="#">Color</a></li>
+                </ul>
+            
+                <h3>Color</h3>
+                <div class="color-options">
+                    <button class="color-circle" style="background: #22AA22;" aria-label="Verde"></button>
+                    <button class="color-circle" style="background: #2222AA;" aria-label="Azul"></button>
+                    <button class="color-circle" style="background: #000000;" aria-label="Negro"></button>
+                    <button class="color-circle" style="background: #666666;" aria-label="Gris"></button>
+                    <button class="color-circle" style="background: #FF00FF;" aria-label="Rosa"></button>
+                    <button class="color-circle" style="background: #FFA500;" aria-label="Naranja"></button>
+                </div>
+            </aside>
+
+            <main class="products-grid">
+                <!-- Iteración sobre productos (asegúrate de pasarlos desde la vista en Django) -->
+                {% for product in products %}
+                    <div class="product-card">
+                        <img src="{{ product.image_url }}" alt="{{ product.name }}">
+                        <h3>{{ product.name }}</h3>
+                        <p class="price">${{ product.price }}</p>
+                    </div>
+                {% endfor %}
+            </main>
+        </div>
+    </div>
+</body>
+</html>
