@@ -30,7 +30,6 @@ class Hoodie(models.Model):
         DOUBLE_EXTRA_LARGE = 'XXL'
     
     size = models.CharField(max_length=3, null=False, blank=False, choices=Size)
-    details = models.TextField()
     print = models.BooleanField(default=False)
     hood = models.BooleanField(null=False, default=False )
     pocket = models.BooleanField(null=False , default=False)
