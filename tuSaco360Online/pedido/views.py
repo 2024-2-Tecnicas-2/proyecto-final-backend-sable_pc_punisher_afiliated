@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from .forms import HoodieWithImageForm
-from login.models import PrintDesign, HoodiePrintDesign, Hoodie
+from login.models import PrintDesign, HoodiePrintDesign, Hoodie, Order, HoodieOrder
 from django.http import HttpResponse
-
+from datetime import timedelta
+from django.utils import timezone
 # Create your views here.
 
 
@@ -17,12 +18,32 @@ def hoodieForm(request):
             # Crear la instancia de Hoodie
             try:
                 hoodie_instance = form.save(commit=False)
+                
                 hoodie_instance.save()  # Guardamos el hoodie en la base de datos
+                
+                client = request.user
+                
+                deliveryDate = timezone.now().date() + timedelta(days=15) 
+                cantidad = int(request.POST.get('cantidad', 1) )
+                finalPrice = (hoodie_instance.price*cantidad)
+                order_instance = Order.objects.create(
+                    finalPrice=finalPrice,
+                    deliveryDate=deliveryDate,
+                    client=client,
+                    status='Pd'
+                )
+                
+                HoodieOrder.objects.create(
+                    hoodie=hoodie_instance,
+                    order=order_instance,
+                    cantidad= cantidad 
+                )
                 
                 # Si se selecciona estampado, redirigir a printDesign
                 if form.cleaned_data['print']:
                     return redirect('printDesign', hoodie_id=hoodie_instance.id)
                 else:
+                    
                     return redirect('misPedidos')
             except Exception as e:
                 return render(request, 'personalizacionSaco.html', {'form': form, 'error': f'Error al guardar: {e}'})
