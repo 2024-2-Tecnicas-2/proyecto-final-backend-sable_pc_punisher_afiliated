@@ -4,8 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personalización de Saco</title>
+    <style>
+        .main-menu {
+            margin-top: 0px;
+            background: #333;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .main-menu ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .main-menu a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+        
+        .main-menu a:hover {
+            color: #ff9800; /* Color de resalte */
+        }
+        
+        .main-menu ul li {
+            position: relative;
+        }
+        
+        .main-menu ul li::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ff9800;
+            transition: width 0.3s ease;
+        }
+        
+        .main-menu ul li:hover::after {
+            width: 100%;
+        }
+        
+    </style>
 </head>
 <body>
+    <div class="main-menu">
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+
+            {% if request.user.is_authenticated %}
+                <li><a href="{% url 'signout' %}">Salir</a></li>  
+                <li><a href="{% url 'hoodieDesign' %}">Crear Saco</a></li>
+                <li><a href="{% url 'misPedidos' %}">Mis Pedidos</a></li>
+            {% else %}
+                <li><a href="{% url 'signin' %}">Inicio de sesión</a></li>
+                <li><a href="{% url 'signup' %}">Registrarse</a></li>
+            {% endif %}
+        </ul>
+    </div>
     <h1>Personalización de Saco</h1>
 
     <!-- Formulario para cargar el hoodie -->

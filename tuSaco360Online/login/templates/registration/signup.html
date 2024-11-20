@@ -1,23 +1,57 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
+    <link rel="stylesheet" href='{% static "css/registro.css" %}'>
+    <title>Registro de Usuario</title>
 </head>
 <body>
-    {% extends '../base.html' %}
-
-    {% block content %}
-    <h1>Registro</h1>
-
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-
-        <button type="submit">Registrar</button>
-    </form>
-
-    {% endblock %}
+    <div class="container">
+        <!-- Sección de formulario -->
+        <div class="login-form">
+            <h1>Crear Cuenta en TuSaco360Online</h1>
+            <form method="POST">
+                {% csrf_token %}
+                <!-- Nombre de usuario -->
+                <div class="form-group">
+                    <label for="username">Nombre de Usuario</label>
+                    <input type="text" id="username" name="username" value="{{ form.username.value }}" required>
+                </div>
+                <!-- Correo -->
+                <div class="form-group">
+                    <label for="email">Correo</label>
+                    <input type="email" id="email" name="email" value="{{ form.email.value }}" required>
+                </div>
+                <!-- Contraseña -->
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <!-- Nombre Completo -->
+                <div class="form-group">
+                    <label for="name">Nombre Completo</label>
+                    <input type="text" id="name" name="name" value="{{ form.name.value }}" required>
+                </div>
+                <!-- Dirección -->
+                <div class="form-group">
+                    <label for="address">Dirección</label>
+                    <input type="text" id="address" name="address" value="{{ form.address.value }}" required>
+                </div>
+                <!-- Teléfono -->
+                <div class="form-group">
+                    <label for="phone">Número de Celular</label>
+                    <input type="tel" id="phone" name="phone" value="{{ form.phone.value }}" required>
+                </div>
+                <!-- Botón de Registro -->
+                <button type="submit">Registrarse</button>
+                <!-- Link de inicio de sesión -->
+                <div class="signup-link">
+                    ¿Ya tienes cuenta? <a href="{% url 'signin' %}">Inicia sesión</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

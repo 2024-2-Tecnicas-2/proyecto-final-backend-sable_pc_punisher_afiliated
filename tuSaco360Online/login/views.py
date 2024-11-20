@@ -4,10 +4,13 @@ from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, formularioLogin
 
 
-def home(request):
-    # Si el usuario está autenticado, lo redirigimos a la página de "misPedidos"
+def Pedidos(request):
+    
     if request.user.is_authenticated:
-        return redirect('misPedidos')
+        return redirect('misPedidoss')
+
+def home(request):
+    return render(request, 'home.html')
 
     # Lista de productos (puedes agregar o modificar estos productos como desees)
     products = [

@@ -7,6 +7,9 @@ from django.utils import timezone
 # Create your views here.
 
 
+
+
+
 def actualizar_pedido(request):
     return render(request, 'actualizacion_estado.html')
 # Vista para mostrar el formulario y guardar el hoodie
